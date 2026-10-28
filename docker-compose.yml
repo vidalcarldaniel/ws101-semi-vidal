@@ -1,0 +1,21 @@
+# Runs the Momentum app next to the self-hosted Supabase stack.
+# Supabase itself is managed by the Supabase CLI (`npx supabase start`),
+# which runs its services as Docker containers on the `supabase_default`
+# network; this compose file runs the app and joins the same network so it
+# can reach the Supabase API at http://supabase_kong-supabase:55321.
+services:
+  app:
+    build: .
+    container_name: momentum-app
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-http://127.0.0.1:55321}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:?Set it in .env.local (from `npx supabase status`)}
+    networks:
+      - supabase_default
+    restart: unless-stopped
+
+networks:
+  supabase_default:
+    external: true
