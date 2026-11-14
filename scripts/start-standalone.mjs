@@ -23,7 +23,9 @@ if (existsSync(join(root, "public"))) {
   cpSync(join(root, "public"), join(standalone, "public"), { recursive: true });
 }
 
-const port = process.env.PORT || "3000";
+// Port 3000 is intentionally avoided: another local app (OJT Management
+// System) uses it. Momentum standardises on 3001 (override with PORT).
+const port = process.env.PORT || "3001";
 const child = spawn(process.execPath, [join(standalone, "server.js")], {
   stdio: "inherit",
   env: { ...process.env, PORT: port, HOSTNAME: process.env.HOSTNAME || "0.0.0.0" },

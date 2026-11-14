@@ -46,7 +46,8 @@ cp .env.example .env.local
 
 # 4. Run the app
 npm run dev
-# Open http://localhost:3000, create an account, add a goal.
+# Open http://localhost:3001, create an account, add a goal.
+# (Momentum is pinned to port 3001 — port 3000 is used by another local app.)
 ```
 
 > **Ports:** this project's `supabase/config.toml` uses ports 55321–55329 because the
@@ -84,7 +85,7 @@ All tables have RLS enabled with owner-only policies (`auth.uid() = user_id`).
 Example:
 
 ```bash
-curl -X POST http://localhost:3000/api/goals \
+curl -X POST http://localhost:3001/api/goals \
   -H "Content-Type: application/json" \
   -b "sb-<project>-auth-token=<session cookie>" \
   -d '{"title":"Ship v1","category":"work","priority":"high",
