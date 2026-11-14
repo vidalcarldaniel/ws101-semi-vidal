@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "node scripts/start-standalone.mjs",
+    "lint": "eslint",
+    "env:local": "node scripts/switch-env.mjs local",
+    "env:cloud": "node scripts/switch-env.mjs cloud"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
