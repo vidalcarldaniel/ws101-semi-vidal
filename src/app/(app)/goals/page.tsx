@@ -29,52 +29,52 @@ export default async function GoalsPage() {
   const all = goals ?? [];
 
   const statusStyles: Record<string, string> = {
-    completed: "bg-emerald-100 text-emerald-800",
-    in_progress: "bg-blue-100 text-blue-800",
-    cancelled: "bg-zinc-200 text-zinc-500",
-    pending: "bg-zinc-100 text-zinc-700",
+    completed: "bg-ok-soft text-ok",
+    in_progress: "bg-info-soft text-info",
+    cancelled: "bg-surface-2 text-muted",
+    pending: "bg-surface-2 text-muted",
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Goals</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-ink">Goals</h1>
         <Link
           href="/goals/new"
-          className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+          className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-strong"
         >
           + New goal
         </Link>
       </div>
 
       {all.length === 0 ? (
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-muted">
           No goals yet.{" "}
-          <Link href="/goals/new" className="text-emerald-700 hover:underline">
+          <Link href="/goals/new" className="text-brand hover:underline">
             Create one
           </Link>
           .
         </p>
       ) : (
-        <ul className="divide-y divide-zinc-100 overflow-hidden rounded-xl border border-zinc-200 bg-white">
+        <ul className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface shadow-xs">
           {all.map((goal: Goal) => {
             const prog = doneByGoal.get(goal.id);
             return (
               <li key={goal.id}>
                 <Link
                   href={`/goals/${goal.id}`}
-                  className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-zinc-50"
+                  className="flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-canvas"
                 >
                   <div>
-                    <p className="font-medium">{goal.title}</p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="font-medium text-ink">{goal.title}</p>
+                    <p className="text-xs text-muted">
                       {CATEGORY_LABELS[goal.category]} · {goal.priority} priority · due{" "}
                       {new Date(goal.due_at).toLocaleString()}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     {prog && prog.total > 0 && (
-                      <span className="text-xs text-zinc-500">
+                      <span className="text-xs tabular-nums text-muted">
                         {prog.done}/{prog.total} steps
                       </span>
                     )}

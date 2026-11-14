@@ -14,7 +14,7 @@ export default function DeleteGoalButton({ goalId }: { goalId: string }) {
         }
       }}
       disabled={isPending}
-      className="rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50 disabled:opacity-50"
+      className="rounded-md border border-danger/35 px-4 py-2 text-sm font-medium text-danger transition-colors hover:bg-danger-soft disabled:opacity-50"
     >
       {isPending ? "Deleting…" : "Delete goal"}
     </button>

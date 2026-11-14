@@ -32,20 +32,20 @@ export default function SubtaskPanel({ goalId, subtasks }: Props) {
   const pct = subtasks.length ? Math.round((done / subtasks.length) * 100) : 0;
 
   return (
-    <section className="rounded-xl border border-zinc-200 bg-white p-6">
+    <section className="rounded-xl border border-line bg-surface p-6 shadow-xs">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold">Steps</h2>
+        <h2 className="font-semibold text-ink">Steps</h2>
         {subtasks.length > 0 && (
-          <span className="text-sm text-zinc-500">
+          <span className="text-sm tabular-nums text-muted">
             {done}/{subtasks.length} done
           </span>
         )}
       </div>
 
       {subtasks.length > 0 && (
-        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-zinc-100">
+        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-surface-2">
           <div
-            className="h-full rounded-full bg-emerald-500 transition-all"
+            className="h-full rounded-full bg-brand transition-all"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -63,16 +63,16 @@ export default function SubtaskPanel({ goalId, subtasks }: Props) {
                   const checked = e.target.checked;
                   startTransition(() => toggleSubtask(goalId, st.id, checked));
                 }}
-                className="h-4 w-4 rounded border-zinc-300 accent-emerald-600"
+                className="h-4 w-4 rounded border-line-strong accent-brand"
               />
-              <span className={st.is_done ? "text-zinc-400 line-through" : ""}>
+              <span className={st.is_done ? "text-muted line-through" : "text-ink"}>
                 {st.title}
               </span>
             </label>
             <button
               disabled={isPending}
               onClick={() => startTransition(() => deleteSubtask(goalId, st.id))}
-              className="text-xs text-zinc-400 hover:text-red-600"
+              className="text-xs text-faint transition-colors hover:text-danger"
               aria-label={`Delete subtask ${st.title}`}
             >
               ✕
@@ -86,17 +86,17 @@ export default function SubtaskPanel({ goalId, subtasks }: Props) {
           name="title"
           maxLength={200}
           placeholder="Add a step…"
-          className="flex-1 rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="flex-1 rounded-md border border-line-strong bg-surface px-3 py-2 text-sm text-ink transition-colors placeholder:text-muted focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20"
         />
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-md border border-emerald-600 px-3 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-50 disabled:opacity-50"
+          className="rounded-md border border-brand/40 bg-surface px-3 py-2 text-sm font-medium text-brand transition-colors hover:bg-brand-soft disabled:opacity-50"
         >
           Add
         </button>
       </form>
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-2 text-xs text-danger">{error}</p>}
     </section>
   );
 }

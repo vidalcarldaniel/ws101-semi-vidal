@@ -22,7 +22,7 @@ const PRIORITIES = ["low", "medium", "high"] as const;
 const STATUSES = ["pending", "in_progress", "completed", "cancelled"] as const;
 
 const inputClass =
-  "mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none";
+  "mt-1 w-full rounded-md border border-line-strong bg-surface px-3 py-2 text-sm text-ink transition-colors placeholder:text-muted focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";
 
 export default function GoalForm({ action, initial, submitLabel }: Props) {
   const [state, formAction, pending] = useActionState(action, {} as GoalFormState);
@@ -30,7 +30,7 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
   return (
     <form action={formAction} className="space-y-4">
       <div>
-        <label htmlFor="title" className="block text-sm font-medium">Title *</label>
+        <label htmlFor="title" className="block text-sm font-medium text-ink">Title *</label>
         <input
           id="title"
           name="title"
@@ -41,28 +41,29 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
           className={inputClass}
         />
         {state.fieldErrors?.title && (
-          <p className="mt-1 text-xs text-red-600">{state.fieldErrors.title}</p>
+          <p className="mt-1 text-xs text-danger">{state.fieldErrors.title}</p>
         )}
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium">Description</label>
+        <label htmlFor="description" className="block text-sm font-medium text-ink">Description</label>
         <textarea
           id="description"
           name="description"
           rows={3}
           maxLength={2000}
           defaultValue={initial?.description ?? ""}
+          placeholder="Optional details…"
           className={inputClass}
         />
         {state.fieldErrors?.description && (
-          <p className="mt-1 text-xs text-red-600">{state.fieldErrors.description}</p>
+          <p className="mt-1 text-xs text-danger">{state.fieldErrors.description}</p>
         )}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
-          <label htmlFor="dueAt" className="block text-sm font-medium">Due (date &amp; time) *</label>
+          <label htmlFor="dueAt" className="block text-sm font-medium text-ink">Due (date &amp; time) *</label>
           <input
             id="dueAt"
             name="dueAt"
@@ -72,11 +73,11 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
             className={inputClass}
           />
           {state.fieldErrors?.dueAt && (
-            <p className="mt-1 text-xs text-red-600">{state.fieldErrors.dueAt}</p>
+            <p className="mt-1 text-xs text-danger">{state.fieldErrors.dueAt}</p>
           )}
         </div>
         <div>
-          <label htmlFor="reminderMinutesBefore" className="block text-sm font-medium">
+          <label htmlFor="reminderMinutesBefore" className="block text-sm font-medium text-ink">
             Alarm before deadline
           </label>
           <select
@@ -94,7 +95,7 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
           </select>
         </div>
         <div>
-          <label htmlFor="category" className="block text-sm font-medium">Category</label>
+          <label htmlFor="category" className="block text-sm font-medium text-ink">Category</label>
           <select
             id="category"
             name="category"
@@ -110,7 +111,7 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="priority" className="block text-sm font-medium">Priority</label>
+          <label htmlFor="priority" className="block text-sm font-medium text-ink">Priority</label>
           <select
             id="priority"
             name="priority"
@@ -123,7 +124,7 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
           </select>
         </div>
         <div>
-          <label htmlFor="status" className="block text-sm font-medium">Status</label>
+          <label htmlFor="status" className="block text-sm font-medium text-ink">Status</label>
           <select
             id="status"
             name="status"
@@ -138,13 +139,13 @@ export default function GoalForm({ action, initial, submitLabel }: Props) {
       </div>
 
       {state.error && (
-        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p>
+        <p className="rounded-md bg-danger-soft px-3 py-2 text-sm text-danger">{state.error}</p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="rounded-md bg-emerald-600 px-5 py-2.5 font-semibold text-white hover:bg-emerald-700 disabled:opacity-50"
+        className="rounded-md bg-brand px-5 py-2.5 font-semibold text-white shadow-sm transition-colors hover:bg-brand-strong disabled:opacity-50"
       >
         {pending ? "Saving…" : submitLabel}
       </button>

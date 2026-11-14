@@ -38,8 +38,8 @@ export default async function GoalDetailPage(props: PageProps<"/goals/[id]">) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <section className="rounded-xl border border-zinc-200 bg-white p-6">
-          <h2 className="font-semibold">Edit goal</h2>
+        <section className="rounded-xl border border-line bg-surface p-6 shadow-xs">
+          <h2 className="font-semibold text-ink">Edit goal</h2>
           <div className="mt-4">
             <GoalForm action={update} initial={goal} submitLabel="Save changes" />
           </div>

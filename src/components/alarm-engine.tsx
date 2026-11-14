@@ -125,9 +125,9 @@ export default function AlarmEngine() {
       {permission !== "granted" && (
         <button
           onClick={askPermission}
-          className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-left text-sm text-amber-900 hover:bg-amber-100"
+          className="rounded-lg border border-warn/30 bg-warn-soft px-4 py-2 text-left text-sm text-warn shadow-xs transition-colors hover:border-warn/50"
         >
-          <strong className="block">Enable system notifications</strong>
+          <strong className="block text-warn">Enable system notifications</strong>
           So alarms ring even when this tab is in the background.
         </button>
       )}
@@ -135,30 +135,30 @@ export default function AlarmEngine() {
       {toasts.map((goal) => (
         <div
           key={`${goal.id}:${goal.kind}`}
-          className="rounded-lg border border-emerald-300 bg-white p-4 shadow-lg"
+          className="rounded-lg border border-brand/35 bg-surface p-4 shadow-lg"
           role="alert"
         >
           <div className="flex items-start justify-between gap-2">
             <div>
-              <p className="font-semibold text-emerald-800">
+              <p className="font-semibold text-brand-ink">
                 {goal.kind === "deadline" ? "⏰ Deadline reached!" : "🔔 Reminder"}
               </p>
-              <p className="mt-1 text-sm text-zinc-800">{goal.title}</p>
-              <p className="mt-1 text-xs text-zinc-500">
+              <p className="mt-1 text-sm text-ink">{goal.title}</p>
+              <p className="mt-1 text-xs tabular-nums text-muted">
                 Due {new Date(goal.due_at).toLocaleString()}
               </p>
             </div>
             <button
               onClick={() => dismiss(goal)}
               aria-label="Dismiss"
-              className="text-zinc-400 hover:text-zinc-700"
+              className="text-faint transition-colors hover:text-ink"
             >
               ✕
             </button>
           </div>
           <button
             onClick={() => goToGoal(goal)}
-            className="mt-3 w-full rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700"
+            className="mt-3 w-full rounded-md bg-brand px-3 py-1.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-strong"
           >
             Open goal
           </button>

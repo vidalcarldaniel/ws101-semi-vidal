@@ -18,24 +18,33 @@ export default async function AppLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-zinc-200 bg-white">
+      <header className="sticky top-0 z-40 border-b border-line bg-surface/85 backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="text-lg font-bold text-emerald-700">
+            <Link
+              href="/dashboard"
+              className="text-lg font-bold tracking-tight text-brand"
+            >
               Momentum
             </Link>
-            <nav className="flex gap-4 text-sm font-medium text-zinc-600">
-              <Link href="/dashboard" className="hover:text-zinc-900">Dashboard</Link>
-              <Link href="/goals" className="hover:text-zinc-900">Goals</Link>
-              <Link href="/goals/new" className="hover:text-zinc-900">New goal</Link>
+            <nav className="flex gap-4 text-sm font-medium text-muted">
+              <Link href="/dashboard" className="transition-colors hover:text-ink">
+                Dashboard
+              </Link>
+              <Link href="/goals" className="transition-colors hover:text-ink">
+                Goals
+              </Link>
+              <Link href="/goals/new" className="transition-colors hover:text-ink">
+                New goal
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden text-sm text-zinc-500 sm:inline">
+            <span className="hidden text-sm text-muted sm:inline">
               {user.email}
             </span>
             <form action={signOut}>
-              <button className="rounded-md border border-zinc-300 px-3 py-1.5 text-sm font-medium hover:bg-zinc-100">
+              <button className="rounded-md border border-line-strong px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-surface-2">
                 Sign out
               </button>
             </form>
